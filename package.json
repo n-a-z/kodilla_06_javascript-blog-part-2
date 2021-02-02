@@ -15,9 +15,10 @@
     "build:sass": "node-sass --output-style compact -o css sass",
     "build-dev": "npm-run-all build-dev:*",
     "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
-    "watch": "npm-run-all build build-dev -p watch:*",
+    "watch": "npm-run-all build:* build-dev -p watch:*",
     "watch:browsersync": "browser-sync start --server --files \"css/*.css\" \"*.html\" \"js/*.js\"",
-    "watch:sassprefixer": "onchange sass/*.scss -- npm run build-dev"
+    "watch:sassprefixer": "onchange sass/*.scss -- npm run build-dev",
+    "watch:eslint": "esw --watch --changed --fix js/"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.14",
     "eslint": "^7.19.0",
+    "eslint-watch": "^7.0.0",
     "html-validate": "^4.3.0",
     "mkdirp": "^1.0.4",
     "node-sass": "^5.0.0",
