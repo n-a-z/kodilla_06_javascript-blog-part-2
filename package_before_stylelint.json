@@ -11,7 +11,6 @@
     "test": "npm-run-all test:*",
     "test:html": "html-validate *.html",
     "test:js": "eslint js/",
-    "test:scss": "stylelint sass/",
     "build": "npm-run-all build:* test",
     "build:sass": "node-sass --output-style compact -o css sass",
     "build-dev": "npm-run-all build-dev:*",
@@ -32,8 +31,6 @@
     "mkdirp": "^1.0.4",
     "node-sass": "^5.0.0",
     "npm-run-all": "^4.1.5",
-    "onchange": "^7.1.0",
-    "stylelint": "^13.9.0",
-    "stylelint-scss": "^3.18.0"
+    "onchange": "^7.1.0"
   }
 }
