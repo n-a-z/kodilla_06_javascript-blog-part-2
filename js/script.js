@@ -1,7 +1,6 @@
 'use strict';
 
 //Globals
-
 const opts = {
   articleSelector: '.post',
   titleSelector: '.post-title',
@@ -94,6 +93,9 @@ generateTitleLinks();
 
 //START generating Tags
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
+
   /* find all articles */
   const articles = document.querySelectorAll(opts.articleSelector);
 
@@ -121,11 +123,17 @@ function generateTags(){
 
       /* generate HTML of the link */
       const tagHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
-      //console.log(tagHTML);
+      console.log(tagHTML);
 
       /* add generated code to html variable */
       html += tagHTML + ' ';
       //console.log(html);
+
+      /* [NEW] check if this link is NOT already in allTags */
+      if(allTags.indexOf(tagHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(tagHTML);
+      }
 
     /* END LOOP: for each tag */
     }
@@ -135,6 +143,11 @@ function generateTags(){
 
   /* END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
 }
 
 generateTags();
@@ -290,4 +303,3 @@ function addClickListenersToAuthors(){
 }
 
 addClickListenersToAuthors();
-
