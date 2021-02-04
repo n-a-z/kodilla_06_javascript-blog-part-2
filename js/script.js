@@ -237,6 +237,7 @@ function authorClickHandler(event){
   author = author.replace('-', ' ');
   //console.log(author);
 
+  //START This part is only needed for multiple authors and can be deleted for a single author
   /* find all author links with class active */
   const activeLinks = document.querySelectorAll('a.active[href^="#author-"]');
 
@@ -257,6 +258,7 @@ function authorClickHandler(event){
   /* add class active */
     authorLink.classList.add('active');
 
+  //END This part is only needed for multiple authors and can be deleted for a single author
   /* END LOOP: for each found author link */
   }
 
@@ -267,7 +269,7 @@ function authorClickHandler(event){
 function addClickListenersToAuthors(){
   /* find all links to authors */
   const links = document.querySelectorAll('a[href^="#author-"]');
-  console.log(links);
+  //console.log(links);
 
   /* START LOOP: for each link */
   for(let link of links) {
