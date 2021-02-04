@@ -1,5 +1,17 @@
 'use strict';
 
+//Globals
+
+const opts = {
+  articleSelector: '.post',
+  titleSelector: '.post-title',
+  titleListSelector: '.titles',
+  articleTagsSelector: '.post-tags .list',
+  articleAuthorSelector: '.post-author',
+  tagsListSelector: 'tags.list',
+  authorsListSelector: 'authors.list'
+};
+
 function titleClickHandler(event) {
   event.preventDefault(); //Prevents from changing sites url (will not add #link ad the end)
   const clickedElement = this;
@@ -37,19 +49,14 @@ function titleClickHandler(event) {
 
 
 //START generating title list
-const optArticleSelector = '.post',
-  optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles',
-  optArticleTagsSelector  = '.post-tags .list',
-  optArticleAuthorSelector  = '.post-author';
 
 function generateTitleLinks(customSelector = '') {
   /* remove contents of titleList */
-  const titleList = document.querySelector(optTitleListSelector);
+  const titleList = document.querySelector(opts.titleListSelector);
   titleList.innerHTML = '';
 
   /* for each article */
-  const articles = document.querySelectorAll(optArticleSelector + customSelector);
+  const articles = document.querySelectorAll(opts.articleSelector + customSelector);
   //console.log(articles);
   //console.log(customSelector);
 
@@ -61,7 +68,7 @@ function generateTitleLinks(customSelector = '') {
     //console.log(articleSelector);
 
     /* find the title element AND get the title from the title element*/
-    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    const articleTitle = article.querySelector(opts.titleSelector).innerHTML;
     //console.log(articleTitle);
 
     /* create HTML of the link */
@@ -88,13 +95,13 @@ generateTitleLinks();
 //START generating Tags
 function generateTags(){
   /* find all articles */
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(opts.articleSelector);
 
   /* START LOOP: for every article: */
   for (let article of articles) {
 
     /* find tags wrapper */
-    const tagList = article.querySelector(optArticleTagsSelector);
+    const tagList = article.querySelector(opts.articleTagsSelector);
     //console.log(tagList);
 
     /* make html variable with empty string */
@@ -193,7 +200,7 @@ addClickListenersToTags();
 //START generating Authors
 function generateAuthors(){
   /* find all articles */
-  const articles = document.querySelectorAll(optArticleSelector);
+  const articles = document.querySelectorAll(opts.articleSelector);
   //console.log(articles);
 
   /* START LOOP: for every article: */
@@ -208,7 +215,7 @@ function generateAuthors(){
     //console.log(authorHTML);
 
     /* find authors wrapper */
-    const authorList = article.querySelector(optArticleAuthorSelector);
+    const authorList = article.querySelector(opts.articleAuthorSelector);
     //console.log(authorList);
 
     /* insert HTML of all the links into the authors wrapper */
@@ -283,3 +290,4 @@ function addClickListenersToAuthors(){
 }
 
 addClickListenersToAuthors();
+
