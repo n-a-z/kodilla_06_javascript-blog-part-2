@@ -130,7 +130,8 @@ function generateTags(){
       //console.log(allTags.indexOf(tagHTML));
 
       /* [NEW] check if this link is NOT already in allTags */
-      if(!allTags.hasOwnProperty(tag)){
+      //if(!allTags.hasOwnProperty(tag)){
+      if(!Object.prototype.hasOwnProperty.call(allTags, tag)){
         /* [NEW] add generated code to allTags array */
         allTags[tag] = 1;
       } else {
@@ -156,7 +157,7 @@ function generateTags(){
   for(let tag in allTags){
     /* [NEW] generate code of a link and add it to AllTagsHTML */
     allTagsHTML += '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a> (' + allTags[tag] + ')</li>';
-    console.log(tag);
+    //console.log(tag);
   }
 
   /* [NEW] add html from allTags to tagList */
