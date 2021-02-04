@@ -268,8 +268,35 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
-//START generating Authors
+function calculateAuthorParams(authors) {
+  const params = {
+    min: 999999999,
+    max: 0
+  };
+
+  for(let author in authors) {
+    if(authors[author] > params.max){
+      params.max = authors[author];
+    }
+
+    if(authors[author] < params.min){
+      params.min = authors[author];
+    }
+  }
+
+  return params;
+}
+
+function calculateAuthorClass(count, params){
+  const classNumber = Math.floor( ((count - params.min) / (params.max - params.min)) * (opts.cloudClassCount - 1) + 1 );
+
+  return opts.cloudClassPrefix + classNumber;
+}
+
 function generateAuthors(){
+  /* [NEW] create a new variable allTags with an empty object */
+  let allAuthors = [];
+
   /* find all articles */
   const articles = document.querySelectorAll(opts.articleSelector);
   //console.log(articles);
@@ -289,12 +316,24 @@ function generateAuthors(){
     const authorList = article.querySelector(opts.articleAuthorSelector);
     //console.log(authorList);
 
+    /* [NEW] check if this link is NOT already in allAuthors */
+    if(allAuthors.indexOf(authorHTML) == -1){
+      /* [NEW] add generated code to allTags array */
+      allAuthors.push(authorHTML);
+    }
+
     /* insert HTML of all the links into the authors wrapper */
     authorList.innerHTML = 'by ' + authorHTML;
     //console.log(authorList);
 
   /* END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const authorList = document.querySelector(opts.authorsListSelector);
+
+  /* [NEW] add html from allTags to tagList */
+  authorList.innerHTML = allAuthors.join(' ');
+
 }
 
 generateAuthors();
