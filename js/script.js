@@ -334,7 +334,7 @@ function generateAuthors(){
   /* [NEW] find list of tags in right column */
   const authorList = document.querySelector(opts.authorsListSelector);
 
-  const authorsParams = calculateTagsParams(allAuthors);
+  const authorsParams = calculateAuthorParams(allAuthors);
 
   let allAuthorsHTML = '';
 
