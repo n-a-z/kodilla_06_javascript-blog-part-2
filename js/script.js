@@ -351,7 +351,7 @@ function generateAuthors(){
     } else {
       allAuthors[articleAuthor]++;
     }
-    console.log(allAuthors);
+    //console.log(allAuthors);
 
     /* insert HTML of all the links into the authors wrapper */
     authorList.innerHTML = 'by ' + authorHTML;
@@ -364,16 +364,23 @@ function generateAuthors(){
 
   const authorsParams = calculateTagsParams(allAuthors);
 
-  let allAuthorsHTML = '';
+  //let allAuthorsHTML = '';
+  const allAuthorsData = {authors: []};
 
   for(let author in allAuthors){
     /* [NEW] generate code of a link and add it to AllTagsHTML */
-    allAuthorsHTML += '<li><a href="#author-' + author.replace(' ', '-') + '" class="' + calculateTagClass(allAuthors[author], authorsParams) + '"><span>' + author + '</span></a> (' + allAuthors[author] + ')</li>';
+    //allAuthorsHTML += '<li><a href="#author-' + author.replace(' ', '-') + '" class="' + calculateTagClass(allAuthors[author], authorsParams) + '"><span>' + author + '</span></a> (' + allAuthors[author] + ')</li>';
+    allAuthorsData.authors.push({
+      author: author,
+      authorLink: author.replace(' ', '-'),
+      count: allAuthors[author],
+      className: calculateTagClass(allAuthors[author], authorsParams)
+    });
   }
 
   /* [NEW] add html from allAuthorsHTML to authorList */
-  authorList.innerHTML = allAuthorsHTML;
-
+  //authorList.innerHTML = allAuthorsHTML;
+  authorList.innerHTML = templates.authorCloudLink(allAuthorsData);
 }
 
 generateAuthors();
