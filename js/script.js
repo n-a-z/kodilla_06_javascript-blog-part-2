@@ -268,6 +268,7 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
+/* Functions for generating classes for Author Cloud. Not needed if classes are the same as Tag Cloud.
 function calculateAuthorParams(authors) {
   const params = {
     min: 999999999,
@@ -292,6 +293,7 @@ function calculateAuthorClass(count, params){
 
   return opts.cloudClassPrefix + classNumber;
 }
+*/
 
 function generateAuthors(){
   /* [NEW] create a new variable allTags with an empty object */
@@ -334,13 +336,13 @@ function generateAuthors(){
   /* [NEW] find list of tags in right column */
   const authorList = document.querySelector(opts.authorsListSelector);
 
-  const authorsParams = calculateAuthorParams(allAuthors);
+  const authorsParams = calculateTagsParams(allAuthors);
 
   let allAuthorsHTML = '';
 
   for(let author in allAuthors){
     /* [NEW] generate code of a link and add it to AllTagsHTML */
-    allAuthorsHTML += '<li><a href="#author-' + author.replace(' ', '-') + '" class="' + calculateAuthorClass(allAuthors[author], authorsParams) + '"><span>' + author + '</span></a> (' + allAuthors[author] + ')</li>';
+    allAuthorsHTML += '<li><a href="#author-' + author.replace(' ', '-') + '" class="' + calculateTagClass(allAuthors[author], authorsParams) + '"><span>' + author + '</span></a> (' + allAuthors[author] + ')</li>';
   }
 
   /* [NEW] add html from allAuthorsHTML to authorList */
