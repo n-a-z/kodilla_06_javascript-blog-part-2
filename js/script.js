@@ -2,7 +2,8 @@
 
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
-  articleTags: Handlebars.compile(document.querySelector('#template-article-tags').innerHTML)
+  articleTags: Handlebars.compile(document.querySelector('#template-article-tags').innerHTML),
+  articleAuthor: Handlebars.compile(document.querySelector('#template-article-author').innerHTML)
 };
 
 //Globals
@@ -320,7 +321,13 @@ function generateAuthors(){
     //console.log(articleAuthor);
 
     /* generate HTML of the link */
-    const authorHTML = '<a href="#author-' + articleAuthor.replace(' ', '-') + '"><span>' + articleAuthor + '</span></a>';
+
+    const linkHTMLData = {
+      articleAuthors: articleAuthor,
+      articleAuthorLink: articleAuthor.replace(' ', '-')
+    };
+    const authorHTML = templates.articleAuthor(linkHTMLData);
+    //const authorHTML = '<a href="#author-' + articleAuthor.replace(' ', '-') + '"><span>' + articleAuthor + '</span></a>';
     //console.log(authorHTML);
 
     /* find authors wrapper */
