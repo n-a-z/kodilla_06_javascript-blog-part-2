@@ -1,5 +1,10 @@
 'use strict';
 
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  articleTags: Handlebars.compile(document.querySelector('#template-article-tags').innerHTML)
+};
+
 //Globals
 const opts = {
   articleSelector: '.post',
@@ -73,7 +78,9 @@ function generateTitleLinks(customSelector = '') {
     //console.log(articleTitle);
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#' + articleSelector + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = {id: articleSelector, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
+    //const linkHTML = '<li><a href="#' + articleSelector + '"><span>' + articleTitle + '</span></a></li>';
     //console.log(linkHTML);
 
     /* insert link into titleList */
@@ -158,7 +165,9 @@ function generateTags(){
       //console.log(tag);
 
       /* generate HTML of the link */
-      const tagHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+      const linkHTMLData = {articleTag: tag};
+      const tagHTML = templates.articleTags(linkHTMLData);
+      //const tagHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
       //console.log(tagHTML);
 
       /* add generated code to html variable */
